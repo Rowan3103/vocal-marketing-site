@@ -150,7 +150,7 @@
                             <span id="error-message" class="absolute -bottom-6 left-0 text-red-500 text-sm hidden">Please enter a valid email address</span>
                         </div>
                     </div>
-                    <div class="typing-container">
+                    <div class="typing-container max-w-sm">
                         <p id="email-status" class="text-gray-300 text-md typing-text">Leave your email to request a demo</p>
                     </div>
                 </div>
@@ -208,7 +208,7 @@
             await sleep(1000);
             
             // Continue with the rest of the message
-            const remainingText = ", please check your inbox for more info ";
+            const remainingText = ", please check your inbox shortly for more info ";
             element.textContent = thankYou;
             for (let i = 0; i < remainingText.length; i++) {
                 element.textContent += remainingText[i];
@@ -265,7 +265,7 @@
                 emailStatus.style.opacity = '0';
                 setTimeout(async () => {
                     emailStatus.style.opacity = '1';
-                    await typeText(emailStatus, 'Thank you, please check your inbox shortly for more info ');
+                    await typeText(emailStatus, 'Thank you, please check your inbox shortly for more info');
                 }, 200);
 
             } catch (error) {
