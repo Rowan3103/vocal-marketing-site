@@ -59,19 +59,16 @@
 
         .typing-container {
             position: relative;
-            display: inline-flex;
-            justify-content: center;
             width: 100%;
-            max-width: 384px;
+            max-width: 384px; /* same as max-w-sm */
+            margin: 0 auto;
         }
 
         .typing-text {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            width: 100%;
             text-align: center;
             white-space: normal;
-            width: 100%;
         }
 
         .typing-cursor::after {
@@ -152,8 +149,8 @@
                             <span id="error-message" class="absolute -bottom-6 left-0 text-red-500 text-sm hidden">Please enter a valid email address</span>
                         </div>
                     </div>
-                    <div class="typing-container mx-auto">
-                        <p id="email-status" class="text-gray-300 text-md typing-text">Leave your email to request a demo</p>
+                    <div class="typing-container">
+                        <p id="email-status" class="text-gray-300 text-md typing-text px-6">Leave your email to request a demo</p>
                     </div>
                 </div>
             </div>
