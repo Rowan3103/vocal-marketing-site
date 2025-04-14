@@ -62,6 +62,9 @@
             width: 100%;
             max-width: 384px; /* same as max-w-sm */
             margin: 0 auto;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         .typing-text {
@@ -69,6 +72,9 @@
             width: 100%;
             text-align: center;
             white-space: normal;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         .typing-cursor::after {
@@ -182,45 +188,26 @@
         window.addEventListener('load', setInitialWidth);
 
         async function typeText(element, text) {
-            // Calculate the width of the full text and set it as width of container
-            const tempSpan = document.createElement('span');
-            tempSpan.style.visibility = 'hidden';
-            tempSpan.style.whiteSpace = 'nowrap';
-            tempSpan.textContent = text;
-            document.body.appendChild(tempSpan);
-            const width = tempSpan.offsetWidth;
-            document.body.removeChild(tempSpan);
-            element.parentElement.style.width = width + 'px';
+            const thankYou = 'Thank you';
             
-            element.innerHTML = '';
-            element.classList.add('typing-cursor');
-            
-            // Type "Thank you"
-            const thankYou = "Thank you";
+            // Type out "Thank you"
+            element.textContent = '';
             for (let i = 0; i < thankYou.length; i++) {
                 element.textContent += thankYou[i];
-                await sleep(Math.random() * 15 + 8);
+                await sleep(50);
             }
-
-            // Show loading dots
-            element.innerHTML = thankYou + '<span class="loading"><span>.</span><span>.</span><span>.</span></span>';
+            
             await sleep(1000);
             
             // Continue with the rest of the message
-            const remainingText = ", please check your inbox shortly for more info ";
+            const remainingText = ", please check your inbox shortly for more info";
             element.textContent = thankYou;
             for (let i = 0; i < remainingText.length; i++) {
                 element.textContent += remainingText[i];
-                if (remainingText[i] === ',' || remainingText[i] === '.') {
-                    await sleep(150);
-                } else if (remainingText[i] === ' ') {
-                    await sleep(Math.random() * 20 + 10);
-                } else {
-                    await sleep(Math.random() * 15 + 8);
-                }
+                // Force layout reflow to ensure proper wrapping
+                element.offsetHeight;
+                await sleep(50);
             }
-            
-            element.classList.remove('typing-cursor');
         }
 
         async function handleSubmit() {
